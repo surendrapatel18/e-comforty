@@ -160,16 +160,29 @@
     padding: 0 20px;
   }
   .about-section {
-    padding:20px 0;
+    padding:30px 0;
   }
 }
 
 @media only screen and (max-width: 546px) {
 
-  .w-flex {
-    flex-direction: column;
+  
+  
+.top-left-content p, select,
+.top-right-content p {
+  gap:0px;
+  color: var(--color-white);
+  margin: 0;
+  padding: 0;
+  font-size:11px !important;
+}
 
-  }
+.top-right-content{
+  padding:0 !important;
+}
+.cricle-img {
+  padding-right:0px;
+}
 
   .top-right-content {
     padding-top: 12px;
@@ -185,9 +198,6 @@
 
   .box-banner {
     padding: 50px 70px;
-  }
-  .about-section {
-    padding:0;
   }
 
   .footer-bottom,
@@ -241,9 +251,7 @@ h6{
 
 
 @media only screen and (max-width:475px) {
-  .main-container {
-    padding: 0 10px;
-  }
+ 
   .nav-icons {
     width:34px;
     height:38px;
@@ -271,6 +279,26 @@ h6{
   .newsletter-input {
     flex-direction: column;
   }
+.w-flex{
+  flex-direction: column;
+}
+
+  
+.top-left-content p, select,
+.top-right-content p {
+  gap:0px;
+  color: var(--color-white);
+  margin: 0;
+  padding: 0;
+  font-size:14px !important;
+}
+
+.top-right-content{
+  padding-top:10px !important;
+}
+.cricle-img {
+  padding-right:10px;
+}
 
   .newsletter-input button {
     width: 100%;
@@ -368,9 +396,23 @@ h1 {
 
 }
 
-@media only screen and (max-width:314px) {
+@media only screen and (max-width:333px) {
   .after{
     margin-left:15px;
     padding-top:10px;
   }
+    
+.shop-cart-icon {
+  width:120px;
+  height:45px;
+}
+.nav-icons{
+  width:45px;
+  height:45px;
+  margin-left:10px;
+}
+
+.menu-bar {
+  font-size:14px;
+}
 }

@@ -7,30 +7,41 @@ document.getElementById('toggle-menu').addEventListener('click', function() {
 function closeMenu() {
   document.getElementById('mobile-menu').classList.remove('show');
 }
+
   
 // Slider LOGO Animations
-    
-  document.addEventListener("DOMContentLoaded", () => {
-      const sliderWrapper = document.querySelector(".slider-wrapper");
-      const slides = document.querySelectorAll(".slide-logo");
-      const slideWidth = slides[0].offsetWidth;
-      let currentPosition = 0;
 
-      slides.forEach((slide) => {
-          const clone = slide.cloneNode(true);
-          sliderWrapper.appendChild(clone);
-      });
+document.addEventListener("DOMContentLoaded", () => {
+  const sliderWrapper = document.querySelector(".slider-wrapper");
+  const slides = Array.from(document.querySelectorAll(".slide-logo"));
 
-      const autoScroll = () => {
-          currentPosition += 1;
-          if (currentPosition >= slideWidth * slides.length) {
-              currentPosition = 0;
-          }
-          sliderWrapper.style.transform = `translateX(-${currentPosition}px)`;
-      };
+  if (slides.length === 0) return; // Prevents errors if no slides exist
 
-      setInterval(autoScroll, 10);
+  const slideWidth = slides[0].getBoundingClientRect().width;
+  let currentPosition = 0;
+
+  // Duplicate slides for infinite scrolling effect
+  slides.forEach((slide) => {
+      const clone = slide.cloneNode(true);
+      sliderWrapper.appendChild(clone);
   });
+
+  const autoScroll = () => {
+      currentPosition += 1;
+
+      if (currentPosition >= slideWidth * slides.length) {
+          currentPosition = 0; // Reset position for seamless looping
+          sliderWrapper.style.transition = "none"; // Prevent jump effect
+      } else {
+          sliderWrapper.style.transition = "transform 0.1s linear";
+      }
+
+      sliderWrapper.style.transform = `translateX(-${currentPosition}px)`;
+  };
+
+  setInterval(autoScroll, 10);
+});
+
 
   
   
@@ -59,34 +70,48 @@ function closeMenu() {
   
     
   // SWIPER-SLIDER 2
-  
-  
+
   var swiper2 = new Swiper(".mySwiper2", {
-    slidesPerView: 1.5, 
+    slidesPerView: 1.2,
     spaceBetween: 20,
-    centeredSlides:true,
+    centeredSlides: true,
     loop: true,
-    loopFillGroupWithBlank: true, 
-      watchSlidesProgress: true,    
-      watchSlidesVisibility: true,
-      on: {
-        init: function () {
-         
-          this.update();
-        },
-      }, 
     breakpoints: {
       1024: {
-        slidesPerView:3.5, 
+        slidesPerView: 3.1,
       },
       768: {
-        slidesPerView:2.5, 
+        slidesPerView: 2.5,
       },
-     
     },
     navigation: {
       nextEl: ".swiper-button-next-custom",
       prevEl: ".swiper-button-prev-custom",
+    },
+    on: {
+      slideChangeTransitionEnd: function () {
+       
+        document.querySelectorAll(".swiper-slide").forEach((img) => {
+
+        });
+  
+       
+        let activeSlide = document.querySelector(".swiper-slide-active");
+        if (activeSlide) {
+          activeSlide.style.opacity = "1";
+        }
+  
+        
+        let nextSlide = activeSlide?.nextElementSibling;
+        let prevSlide = activeSlide?.previousElementSibling;
+  
+        if (nextSlide) {
+          nextSlide.style.opacity = "1"; 
+        }
+        if (prevSlide) {
+          prevSlide.style.opacity = "1"; 
+        }
+      },
     },
   });
   
@@ -163,21 +188,24 @@ function closeMenu() {
   });
   
   // SIGN IN PASSWORD SHOW & HIDE
-  
-  document
-    .getElementById("togglePassword")
-    .addEventListener("click", function () {
-      let passwordField = document.getElementById("password");
-      if (passwordField.type === "password") {
-        passwordField.type = "text";
-        this.classList.remove("fa-eye");
-        this.classList.add("fa-eye-slash");
-      } else {
-        passwordField.type = "password";
-        this.classList.remove("fa-eye-slash");
-        this.classList.add("fa-eye");
-      }
-    });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    let togglePassword = document.getElementById("togglePassword");
+    let passwordField = document.getElementById("password");
+
+    if (togglePassword && passwordField) {
+        togglePassword.addEventListener("click", function () {
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                this.classList.replace("fa-eye", "fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                this.classList.replace("fa-eye-slash", "fa-eye");
+            }
+        });
+    } 
+});
+
 
 // Dropdown All Categoies
 
@@ -188,6 +216,7 @@ document.querySelectorAll('.dropdown-item').forEach(item => {
     dropdown.hide();
   });
 });
+
 
 
 // Filter Gallery
@@ -211,14 +240,16 @@ function filterGallery(category) {
   // Update active class
 
   document.querySelectorAll('.our-products-links a').forEach(function (link) {
-    link.classList.remove('all-active');
+    link.classList.remove('all');
   });
-  document.querySelector(`.our-products-links a[onclick="filterGallery('${category}')"]`).classList.add('all-active');
 }
 
 window.onload = function () {
   filterGallery('all');
 };
+
+
+  
 
 
   
