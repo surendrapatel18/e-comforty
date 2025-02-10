@@ -163,6 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     
   // SWIPER-SLIDER 5
+ 
   
   var swiper5 = new Swiper(".mySwiper5", {
     slidesPerView: 1, 
